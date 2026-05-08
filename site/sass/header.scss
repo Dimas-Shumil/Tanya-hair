@@ -1,0 +1,397 @@
+// ЧЁРНЫЕ / ФОН
+$black-main: #050505;
+$black-soft: #0b0a08;
+$black-warm: #120d09;
+$graphite: #181614;
+
+// БЕЛЫЕ / ТЕКСТ
+$white-main: #f7f2e8;
+$white-soft: rgba(247, 242, 232, 0.82);
+$white-muted: rgba(247, 242, 232, 0.62);
+
+// ЗОЛОТО / ШАМПАНЬ
+$gold-main: #d6b13f;
+$gold-light: #f0d98a;
+$gold-soft: #c9a64a;
+$gold-dark: #8f6f1f;
+
+$champagne-main: #efe2b2;
+$champagne-light: #fff4c8;
+$champagne-muted: #bda66f;
+
+// БРОНЗА / ТЁПЛЫЕ АКЦЕНТЫ
+$bronze-base: #7a5734;
+$bronze-light: #a77a47;
+$bronze-dark: #3b2818;
+
+// ПРОЗРАЧНЫЕ ВЕРСИИ
+$gold-glow-color: rgba(214, 177, 63, 0.32);
+$gold-soft-color: rgba(214, 177, 63, 0.14);
+$champagne-soft: rgba(239, 226, 178, 0.18);
+$dark-glass: rgba(5, 5, 5, 0.48);
+
+// ЗАТЕМНЕНИЕ
+$overlay-dark: rgba(0, 0, 0, 0.72);
+$overlay-deep: rgba(0, 0, 0, 0.86);
+$overlay-light: rgba(0, 0, 0, 0.38);
+
+// ГРАДИЕНТЫ
+$gold-gradient: linear-gradient(
+  180deg,
+  #fff4c8 0%,
+  #f0d98a 28%,
+  #d6b13f 58%,
+  #8f6f1f 100%
+);
+
+$champagne-gradient: linear-gradient(
+  135deg,
+  #fff4c8 0%,
+  #efe2b2 35%,
+  #d6b13f 70%,
+  #8f6f1f 100%
+);
+
+$dark-bg-gradient: linear-gradient(
+  120deg,
+  #050505 0%,
+  #0b0a08 35%,
+  #120d09 58%,
+  #050505 100%
+);
+
+$gold-glow: radial-gradient(
+  circle at 22% 28%,
+  rgba(214, 177, 63, 0.22) 0%,
+  rgba(143, 111, 31, 0.12) 28%,
+  transparent 62%
+);
+
+$warm-glow: radial-gradient(
+  circle at 82% 38%,
+  rgba(167, 122, 71, 0.14) 0%,
+  transparent 52%
+);
+
+// ГРАНИЦЫ
+$border-light: rgba(239, 226, 178, 0.24);
+$border-gold: rgba(214, 177, 63, 0.48);
+$border-dark: rgba(255, 255, 255, 0.08);
+
+// ШРИФТЫ
+$inter: inter;
+$RussoOne: russoone;
+$oswald: oswald;
+$CutiveMono: CutiveMono;
+
+// МИКСИНЫ
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin glass-effect($opacity: 0.08) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(239, 226, 178, 0.14);
+}
+
+html,
+body {
+  background: #000;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; // clip лучше убрать
+}
+
+body.menu-open {
+  overflow: hidden; // когда меню открыто, фон не должен скроллиться
+}
+
+body {
+  padding-top: 90px; // компенсация fixed header
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  width: 100%;
+  padding: 0 32px;
+  background: rgba(5, 5, 5, 0.34);
+  backdrop-filter: blur(10px);
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease;
+
+  &.scrolled {
+    background: rgba(5, 5, 5, 0.72);
+  }
+
+  &.header--hidden {
+    transform: translateY(-100%);
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 1720px;
+    height: 74px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+
+  &__logo {
+    justify-self: start;
+    font-family: serif;
+    font-size: 25px;
+    letter-spacing: 0.22em;
+    color: $gold-main;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  &__nav {
+    ul {
+      display: flex;
+      gap: 44px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      font-family: $inter;
+      font-size: 15px;
+      font-weight: 600;
+      color: $white-soft;
+      text-decoration: none;
+
+      &:hover {
+        color: $gold-main;
+      }
+    }
+  }
+
+  &__btn {
+    justify-self: end;
+    padding: 14px 22px;
+    border: 1px solid $gold-main;
+    color: $gold-main;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 13px;
+    font-weight: 700;
+
+    &:hover {
+      background: $gold-main;
+      color: $black-main;
+    }
+  }
+
+  &__burger {
+    display: none;
+  }
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  background: rgba(0, 0, 0, 0.62);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.3s ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1450;
+
+  width: 100%;
+  padding: 96px 24px 30px;
+
+  background: rgba(5, 5, 5, 0.97);
+  border-bottom: 1px solid $border-light;
+  transform: translateY(-100%);
+  transition: transform 0.38s ease;
+
+  &.active {
+    transform: translateY(0);
+  }
+
+  ul {
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+
+    display: grid;
+    gap: 22px;
+  }
+
+  li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    a {
+      display: block;
+      // padding: 0 0 18px;
+
+      color: $white-main;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+          color: $gold-main
+      };
+    }
+  }
+
+
+  &__actions {
+    width: 100%;
+    max-width: 1720px;
+    margin: 28px auto 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  &__btn {
+    // min-height: 52px;
+    padding: 16px 18px;
+
+    @include flex-center;
+
+    border: 1px solid $gold-main;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+
+    transition: 0.3s ease;
+
+    &-call {
+      color: $gold-main;
+      background: transparent;
+
+      &:hover {
+        color: $white-main;
+        background: $gold-main;
+      }
+    }
+
+    &-signup {
+      color: $white-main;
+      background: $gold-main;
+
+      &:hover {
+        color: $black-main;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 24px;
+
+    &__container {
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__nav--desktop,
+    &__btn {
+      display: none;
+    }
+
+    &__burger {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid $border-light;
+      background: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+
+      span {
+        width: 18px;
+        height: 1px;
+        margin: 0 auto;
+        background: $gold-main;
+        transition: 0.3s ease;
+      }
+
+      &.active {
+        span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+
+        span:nth-child(2) {
+          opacity: 0;
+        }
+
+        span:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 0 16px;
+
+    &__container {
+      height: 64px;
+    }
+
+    &__logo {
+      font-size: 19px;
+      letter-spacing: 0.18em;
+    }
+  }
+
+  .mobile-menu {
+    width: 100%;
+  }
+}
+
+@font-face {
+  font-family: inter;
+  src: url(../fonts/Inter_18pt-Medium.ttf);
+}
+
+@font-face {
+  font-family: russoone;
+  src: url(../fonts/RussoOne-Regular.ttf);
+}

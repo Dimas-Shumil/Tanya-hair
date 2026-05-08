@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="site/css/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__container">
+        <a class="header__logo" href="#home">СТИЛЬ</a>
+
+        <nav class="header__nav header__nav--desktop">
+          <ul>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#masters">Мастера</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+
+        <a class="header__btn" href="#signup">Онлайн запись</a>
+
+        <button class="header__burger" type="button" aria-label="Открыть меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu-overlay"></div>
+
+    <nav class="mobile-menu">
+      <ul>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#masters">Мастера</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+
+      <div class="mobile-menu__actions">
+        <a
+          class="mobile-menu__btn mobile-menu__btn-call"
+          href="tel:+79832719717"
+        >
+          Позвонить
+        </a>
+
+        <a class="mobile-menu__btn mobile-menu__btn-signup" href="#contacts">
+          Записаться
+        </a>
+      </div>
+    </nav>
+
+    <main class="main">
+      <section class="hero" id="home">
+        <div class="hero__bg"></div>
+
+        <div class="hero__container">
+          <div class="hero__content">
+            <div class="hero__eyebrow">
+              <span></span>
+              <p>Абакан, Сибирь</p>
+            </div>
+
+            <h1 class="hero__title">
+              Искусство <br />
+              <span>преображения</span>
+            </h1>
+
+            <p class="hero__text">
+              Премиальное пространство для создания вашего идеального образа.
+              Точные стрижки, безупречное окрашивание, уверенный стиль.
+            </p>
+
+            <div class="hero__actions">
+              <a href="#signup" class="hero__btn hero__btn--primary">
+                Записаться онлайн
+              </a>
+
+              <a href="#services" class="hero__btn hero__btn--secondary">
+                Наши услуги
+              </a>
+            </div>
+          </div>
+
+          <a href="#services" class="hero__scroll">
+            <span>Вниз</span>
+            <i></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- О нас -->
+      <section class="about" id="about">
+        <div class="about__container">
+          <div class="about__image">
+            <img
+              src="site/img/36cacc93-7f08-4deb-8ad8-e35018dc3a09.png"
+              alt="Интерьер салона Стиль"
+            />
+          </div>
+
+          <div class="about__content">
+            <h2 class="about__title">
+              Больше, чем <br />
+              <span>просто салон</span>
+            </h2>
+
+            <div class="about__text">
+              <p>
+                «Стиль» — это студия в самом сердце Абакана, где форма
+                встречается с содержанием. Мы не просто стрижем волосы, мы
+                создаем архитектуру вашего образа, подчеркивая индивидуальность
+                и характер.
+              </p>
+
+              <p>
+                Наша философия строится на трех китах: геометрия, текстура и
+                цвет. Мастера студии постоянно совершенствуют свои навыки,
+                обучаясь у лучших мировых стилистов, чтобы приносить мировые
+                тренды в наш город.
+              </p>
+
+              <p>
+                Каждый визит к нам — это погружение в атмосферу спокойствия,
+                эстетики и безупречного сервиса.
+              </p>
+            </div>
+
+            <div class="about__stats">
+              <div class="about__stat">
+                <h3>5+</h3>
+                <p>лет опыта</p>
+              </div>
+
+              <div class="about__stat">
+                <h3>Top</h3>
+                <p>стилисты города</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- услуги -->
+
+      <section class="services" id="services">
+        <div class="services__container">
+          <div class="services__head">
+            <div>
+              <div class="services__eyebrow">
+                <span></span>
+                <p>Прайс</p>
+              </div>
+
+              <h2 class="services__title">Наши услуги</h2>
+            </div>
+
+            <a href="#price" class="services__link">
+              Полный прайс-лист
+              <span>→</span>
+            </a>
+          </div>
+
+          <div class="services__grid">
+            <article class="service-card">
+              <a href="#signup" class="service-card__image">
+                <img src="site/img/images.jpg" alt="Мужские стрижки" />
+              </a>
+
+              <div class="service-card__head">
+                <h3>Мужские стрижки</h3>
+                <span>от 500 ₽</span>
+              </div>
+
+              <p>
+                Точная геометрия, идеальный фейд и форма, которая легко
+                укладывается дома.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <a href="#signup" class="service-card__image">
+                <img
+                  src="site/img/3d017bfd-8a01-4392-a827-17114d34226d.png"
+                  alt="Женские стрижки"
+                />
+              </a>
+
+              <div class="service-card__head">
+                <h3>Женские стрижки</h3>
+                <span>от 1200 ₽</span>
+              </div>
+
+              <p>
+                Архитектурные стрижки, подчеркивающие текстуру волос и черты
+                лица.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <a href="#signup" class="service-card__image">
+                <img
+                  src="site/img/7a68a521-d1ac-420b-850c-14e0c0b535b9.png"
+                  alt="Окрашивание"
+                />
+              </a>
+
+              <div class="service-card__head">
+                <h3>Окрашивание</h3>
+                <span>от 2500 ₽</span>
+              </div>
+
+              <p>
+                Сложные техники: балаяж, шатуш, airtouch, а также безупречный
+                total blond.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <a href="#signup" class="service-card__image">
+                <img
+                  src="site/img/ca13e531-3aff-44bb-a18c-29a47f23dff2.png"
+                  alt="Укладка и стайлинг"
+                />
+              </a>
+
+              <div class="service-card__head">
+                <h3>Укладка и стайлинг</h3>
+                <span>от 1000 ₽</span>
+              </div>
+
+              <p>
+                Объемные локоны, вечерние прически или легкая небрежность на
+                каждый день.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- контакты -->
+
+      <section class="contacts" id="contacts">
+        <div class="contacts__container">
+          <div class="contacts__info">
+            <h2 class="contacts__title">Ждем вас</h2>
+
+            <div class="contacts__list">
+              <div class="contacts__item">
+                <div class="contacts__icon">
+                  <img src="site/img/geo.png" alt="" />
+                </div>
+                <div>
+                  <span>Адрес</span>
+                  <p>ул. Щетинкина, 20<br />Абакан, Республика Хакасия</p>
+                </div>
+              </div>
+
+              <div class="contacts__item">
+                <div class="contacts__icon">
+                  <img src="site/img/time.png" alt="" />
+                </div>
+                <div>
+                  <span>Режим работы</span>
+                  <p>Пн-Сб: 9:00 – 20:00<br />Вс: 10:00 – 18:00</p>
+                </div>
+              </div>
+
+              <div class="contacts__item">
+                <div class="contacts__icon">
+                  <img src="site/img/phone.png" alt="" />
+                </div>
+                <div>
+                  <span>Телефон</span>
+                  <p><a href="tel:+79832719717">+7 (983) 271-97-17</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form class="contacts__form" id="signupForm">
+  <h3>Записаться к мастеру</h3>
+
+  <label for="signupName">
+    <span>Имя</span>
+    <input
+      type="text"
+      name="name"
+      id="signupName"
+      placeholder="Ваше имя"
+      autocomplete="name"
+      required
+    />
+  </label>
+
+  <label for="signupPhone">
+    <span>Телефон</span>
+    <input
+      type="tel"
+      name="phone"
+      id="signupPhone"
+      inputmode="tel"
+      autocomplete="tel"
+      placeholder="+7 (___) ___-__-__"
+      maxlength="18"
+      pattern="\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}"
+      required
+    />
+  </label>
+
+  <label for="signupService">
+    <span>Услуга</span>
+    <select name="service" id="signupService" required>
+      <option value="Стрижка мужская">Стрижка мужская</option>
+      <option value="Стрижка женская">Стрижка женская</option>
+      <option value="Окрашивание">Окрашивание</option>
+      <option value="Укладка и стайлинг">Укладка и стайлинг</option>
+    </select>
+  </label>
+
+  <button type="submit">Отправить заявку</button>
+</form>
+        </div>
+      </section>
+    </main>
+
+    <!-- футер -->
+
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__top">
+          <a href="#home" class="footer__logo">СТИЛЬ</a>
+
+          <div class="footer__socials">
+            <a href="#" target="_blank" aria-label="instagram">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  d="M17 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4Z"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p>© 2026 СТИЛЬ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+
+          <div class="footer__links">
+            <a href="#">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+            <a href="#">ПРАВИЛА СТУДИИ</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="site/scripts/main.js"></script>
+  </body>
+</html>
