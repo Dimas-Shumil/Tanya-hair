@@ -1114,3 +1114,84 @@ body.no-scroll {
     }
   }
 }
+
+
+// письма уведомления
+
+.contacts__message {
+  display: none;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.45;
+
+  &.active {
+    display: block;
+  }
+
+  &--success {
+    color: #dff7df;
+    background: rgba(70, 160, 90, 0.16);
+    border: 1px solid rgba(120, 220, 140, 0.28);
+  }
+
+  &--error {
+    color: #ffd8d8;
+    background: rgba(180, 55, 55, 0.16);
+    border: 1px solid rgba(255, 120, 120, 0.28);
+  }
+}
+
+#signupSubmitBtn {
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
+// ханипот
+
+.contacts__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+// чекбокс
+
+.contacts__agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.68);
+
+  input {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: #d6b280;
+    cursor: pointer;
+  }
+
+  span {
+    display: block;
+  }
+
+  a {
+    color: #d6b280;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

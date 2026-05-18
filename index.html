@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="site/css/main.css" />
-    <title>Document</title>
+    <title>Парикмахерская СТИЛЬ в Абакане — стрижки, окрашивание и укладки</title>
   </head>
   <body>
     <header class="header">
@@ -282,48 +282,93 @@
             </div>
           </div>
 
-          <form class="contacts__form" id="signupForm">
-  <h3>Записаться к мастеру</h3>
+          <form class="contacts__form" id="signupForm" novalidate>
+            <h3>Записаться к мастеру</h3>
 
-  <label for="signupName">
-    <span>Имя</span>
-    <input
-      type="text"
-      name="name"
-      id="signupName"
-      placeholder="Ваше имя"
-      autocomplete="name"
-      required
-    />
-  </label>
+            <label class="contacts__honeypot" aria-hidden="true">
+              <span>Сайт</span>
+              <input
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </label>
 
-  <label for="signupPhone">
-    <span>Телефон</span>
-    <input
-      type="tel"
-      name="phone"
-      id="signupPhone"
-      inputmode="tel"
-      autocomplete="tel"
-      placeholder="+7 (___) ___-__-__"
-      maxlength="18"
-      pattern="\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}"
-      required
-    />
-  </label>
+            <label for="signupName">
+              <span>Имя</span>
+              <input
+                type="text"
+                name="name"
+                id="signupName"
+                placeholder="Ваше имя"
+                autocomplete="name"
+                minlength="2"
+                maxlength="80"
+                required
+              />
+            </label>
 
-  <label for="signupService">
-    <span>Услуга</span>
-    <select name="service" id="signupService" required>
-      <option value="Стрижка мужская">Стрижка мужская</option>
-      <option value="Стрижка женская">Стрижка женская</option>
-      <option value="Окрашивание">Окрашивание</option>
-      <option value="Укладка и стайлинг">Укладка и стайлинг</option>
-    </select>
-  </label>
+            <label for="signupPhone">
+              <span>Телефон</span>
+              <input
+                type="tel"
+                name="phone"
+                id="signupPhone"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="+7 (___) ___-__-__"
+                maxlength="18"
+                required
+              />
+            </label>
 
-  <button type="submit">Отправить заявку</button>
-</form>
+            <label for="signupService">
+              <span>Услуга</span>
+              <select name="service" id="signupService" required>
+                <option value="Стрижка мужская">Стрижка мужская</option>
+                <option value="Стрижка женская">Стрижка женская</option>
+                <option value="Окрашивание">Окрашивание</option>
+                <option value="Укладка и стайлинг">Укладка и стайлинг</option>
+              </select>
+            </label>
+
+            <label class="contacts__agreement" for="signupAgreement">
+              <input
+                type="checkbox"
+                name="agreement"
+                id="signupAgreement"
+                required
+              />
+
+              <span>
+                Я согласен(а) на обработку персональных данных и ознакомлен(а) с
+                <a
+                  href="/site/privacy-policy.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  политикой конфиденциальности
+                </a>
+              </span>
+            </label>
+
+            <p
+              class="contacts__message contacts__message--success"
+              id="signupSuccessMessage"
+              aria-live="polite"
+            ></p>
+
+            <p
+              class="contacts__message contacts__message--error"
+              id="signupErrorMessage"
+              aria-live="polite"
+            ></p>
+
+            <button type="submit" id="signupSubmitBtn">
+              <span class="btn-text">Отправить заявку</span>
+            </button>
+          </form>
         </div>
       </section>
     </main>
@@ -331,47 +376,63 @@
     <!-- футер -->
 
     <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__top">
-          <a href="#home" class="footer__logo">СТИЛЬ</a>
+  <div class="footer__container">
+    <div class="footer__top">
+      <a href="#home" class="footer__logo">СТИЛЬ</a>
 
-          <div class="footer__socials">
-            <a href="#" target="_blank" aria-label="instagram">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  d="M17 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4Z"
-                />
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="3.5"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer__bottom">
-          <p>© 2026 СТИЛЬ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
-
-          <div class="footer__links">
-            <a href="#">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
-            <a href="#">ПРАВИЛА СТУДИИ</a>
-          </div>
-        </div>
+      <div class="footer__socials">
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="instagram">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-width="1.8"
+              d="M17 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4Z"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="3.5"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+          </svg>
+        </a>
       </div>
-    </footer>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__legal">
+        <p class="footer__copyright">
+          © 2026 СТИЛЬ. Все права защищены.
+        </p>
+
+        <p>
+          Информация, размещённая на сайте, носит исключительно информационный
+          характер и не является публичной офертой. Стоимость услуг, перечень
+          процедур, сроки и условия обслуживания могут быть изменены. Актуальную
+          информацию уточняйте у администратора студии.
+        </p>
+
+        <p>
+          Указанные цены являются предварительными. Итоговая стоимость услуги
+          зависит от выбранной процедуры, длины и состояния волос, расхода
+          материалов и определяется после консультации с мастером.
+        </p>
+      </div>
+
+      <div class="footer__links">
+        <a href="/site/privacy-policy.html">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
     <script src="site/scripts/main.js"></script>
   </body>

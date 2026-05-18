@@ -1,0 +1,21 @@
+{
+  "name": "style-landing",
+  "version": "1.0.0",
+  "description": "Landing page for hair salon STYLE",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "ShumDev",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.4.1",
+    "helmet": "^8.1.0",
+    "nodemailer": "^8.0.4"
+  }
+}

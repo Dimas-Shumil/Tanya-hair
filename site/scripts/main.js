@@ -155,8 +155,61 @@ function initSmoothScroll() {
 function initSignupForm() {
   const form = document.getElementById('signupForm');
   const phoneInput = document.getElementById('signupPhone');
+  const serviceSelect = document.getElementById('signupService');
+  const agreementInput = document.getElementById('signupAgreement');
+  const submitButton = document.getElementById('signupSubmitBtn');
+  const buttonText = submitButton
+    ? submitButton.querySelector('.btn-text')
+    : null;
+  const successMessage = document.getElementById('signupSuccessMessage');
+  const errorMessage = document.getElementById('signupErrorMessage');
 
-  if (!form || !phoneInput) return;
+  if (
+    !form ||
+    !phoneInput ||
+    !serviceSelect ||
+    !agreementInput ||
+    !submitButton ||
+    !buttonText ||
+    !successMessage ||
+    !errorMessage
+  ) {
+    return;
+  }
+
+  const formStartTime = Date.now();
+  let isSending = false;
+
+  const allowedServices = [
+    'Стрижка мужская',
+    'Стрижка женская',
+    'Окрашивание',
+    'Укладка и стайлинг',
+  ];
+
+  const setStatus = (type, message = '') => {
+    successMessage.classList.remove('active');
+    errorMessage.classList.remove('active');
+
+    successMessage.textContent = '';
+    errorMessage.textContent = '';
+
+    if (type === 'success') {
+      successMessage.textContent = message;
+      successMessage.classList.add('active');
+    }
+
+    if (type === 'error') {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('active');
+    }
+  };
+
+  const setLoading = (state) => {
+    isSending = state;
+    submitButton.disabled = state;
+    buttonText.textContent = state ? 'Отправляем...' : 'Отправить заявку';
+  };
 
   phoneInput.addEventListener('input', (event) => {
     event.target.value = formatPhone(event.target.value);
@@ -168,8 +221,12 @@ function initSignupForm() {
     }
   });
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    if (isSending) return;
+
+    setStatus();
 
     const formData = new FormData(form);
 
@@ -177,22 +234,86 @@ function initSignupForm() {
     const phone = String(formData.get('phone') || '').trim();
     const service = String(formData.get('service') || '').trim();
     const phoneDigits = getPhoneDigits(phone);
+    const agreement = formData.get('agreement') === 'on';
 
-    if (!name) {
-      alert('Введите имя');
+    if (!agreement) {
+      setStatus(
+        'error',
+        'Необходимо согласие на обработку персональных данных.',
+      );
+      agreementInput.focus();
+      return;
+    }
+
+    if (!name || name.length < 2 || name.length > 80) {
+      setStatus('error', 'Введите корректное имя.');
+      form.elements.name?.focus();
       return;
     }
 
     if (phoneDigits.length !== 11 || !/^7\d{10}$/.test(phoneDigits)) {
-      alert('Введите корректный номер телефона');
+      setStatus('error', 'Введите корректный номер телефона в формате +7.');
       phoneInput.focus();
       return;
     }
 
-    console.log({ name, phone, service });
+    if (!service) {
+      setStatus('error', 'Выберите услугу.');
+      serviceSelect.focus();
+      return;
+    }
 
-    alert('Заявка отправлена');
-    form.reset();
+    if (!allowedServices.includes(service)) {
+      setStatus('error', 'Некорректная услуга.');
+      return;
+    }
+
+    const website = String(formData.get('website') || '').trim();
+
+    const payload = {
+      name,
+      phone,
+      service,
+      website,
+      agreement,
+      page: window.location.href,
+      form_time: formStartTime,
+    };
+
+    try {
+      setLoading(true);
+
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json().catch(() => ({
+        success: false,
+        message: 'Некорректный ответ сервера.',
+      }));
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Не удалось отправить заявку.');
+      }
+
+      setStatus(
+        'success',
+        data.message || 'Спасибо! Заявка отправлена, мы скоро свяжемся с вами.',
+      );
+
+      form.reset();
+    } catch (error) {
+      setStatus(
+        'error',
+        error.message || 'Ошибка отправки. Попробуйте ещё раз чуть позже.',
+      );
+    } finally {
+      setLoading(false);
+    }
   });
 }
 
