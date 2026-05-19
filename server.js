@@ -15,10 +15,8 @@ const MIN_FORM_TIME_MS = 2000;
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
-
-  // сюда потом поставим реальный домен
-  // 'https://style-abakan.ru',
-  // 'https://www.style-abakan.ru',
+  'https://style-abakan.ru',
+  'https://www.style-abakan.ru',
 ];
 
 app.disable('x-powered-by');
@@ -49,6 +47,7 @@ app.use(
 
 app.use(express.json({ limit: '50kb' }));
 app.use(express.urlencoded({ extended: true, limit: '50kb' }));
+
 app.use(express.static(path.join(__dirname)));
 
 const requiredEnv = [
@@ -101,6 +100,10 @@ app.get('/health', (req, res) => {
   });
 });
 
+app.get('/site/privacy-policy.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'site', 'privacy-policy.html'));
+});
+
 function checkOrigin(req, res, next) {
   const origin = req.headers.origin;
 
@@ -138,7 +141,6 @@ app.post('/api/send', checkOrigin, sendLimiter, async (req, res) => {
     const phone = cleanText(req.body.phone, 40);
     const service = cleanText(req.body.service, 80);
     const page = cleanText(req.body.page, 200);
-
     const website = cleanText(req.body.website, 120);
 
     const agreement =
