@@ -503,5 +503,99 @@
     </footer>
 
     <script src="site/scripts/main.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+
+        "name": "Салон красоты СТИЛЬ",
+
+        "image": "https://твой-домен.ru/site/img/og-image.jpg",
+
+        "url": "https://твой-домен.ru/",
+
+        "telephone": "+79832719717", // Важно: номер должен быть в международном формате
+
+        "priceRange": "₽₽",
+
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ул. Щетинкина, 20",
+          "addressLocality": "Абакан",
+          "addressRegion": "Республика Хакасия",
+          "postalCode": "655017",
+          "addressCountry": "RU"
+        },
+
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "53.720976",
+          "longitude": "91.442423"
+        },
+
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ],
+
+        "sameAs": ["https://instagram.com/yourprofile"],
+
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Услуги салона",
+
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Мужские стрижки"
+              }
+            },
+
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Женские стрижки"
+              }
+            },
+
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Окрашивание волос"
+              }
+            },
+
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Укладка и стайлинг"
+              }
+            }
+          ]
+        }
+      }
+    </script>
   </body>
 </html>
