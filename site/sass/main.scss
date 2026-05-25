@@ -1,5 +1,8 @@
-@import './header.scss';
-@import './footer.scss';
+// @import './header.scss';
+// @import './footer.scss';
+@use "./header";
+@use "./footer";
+@use "./service-pages";
 
 // ЧЁРНЫЕ / ФОН
 $black-main: #050505;

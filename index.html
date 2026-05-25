@@ -23,12 +23,10 @@
     <meta name="robots" content="index, follow" />
 
     <meta name="theme-color" content="#111111" />
-
     <meta name="format-detection" content="telephone=no" />
 
     <link rel="canonical" href="https://style-abakan.ru/" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="СТИЛЬ" />
     <meta property="og:title" content="Парикмахерская СТИЛЬ в Абакане" />
@@ -45,7 +43,6 @@
     <meta property="og:url" content="https://style-abakan.ru/" />
     <meta property="og:locale" content="ru_RU" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Парикмахерская СТИЛЬ в Абакане" />
     <meta
@@ -57,14 +54,9 @@
       content="https://style-abakan.ru/site/img/og-image.jpg"
     />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/site/img/logo.png" />
     <link rel="apple-touch-icon" href="/site/img/logo.png" />
 
-    <!-- Preload Hero Image -->
-    <!-- <link rel="preload" as="image" href="/site/img/hero.webp" /> -->
-
-    <!-- Styles -->
     <link rel="stylesheet" href="site/css/main.css" />
   </head>
 
@@ -107,10 +99,7 @@
       </ul>
 
       <div class="mobile-menu__actions">
-        <a
-          class="mobile-menu__btn mobile-menu__btn-call"
-          href="tel:+79832719717"
-        >
+        <a class="mobile-menu__btn mobile-menu__btn-call" href="tel:+79832719717">
           Позвонить
         </a>
 
@@ -159,7 +148,6 @@
         </div>
       </section>
 
-      <!-- О нас -->
       <section class="about" id="about">
         <div class="about__container">
           <div class="about__image">
@@ -211,8 +199,6 @@
         </div>
       </section>
 
-      <!-- услуги -->
-
       <section class="services" id="services">
         <div class="services__container">
           <div class="services__head">
@@ -233,8 +219,8 @@
 
           <div class="services__grid">
             <article class="service-card">
-              <a href="#contacts" class="service-card__image">
-                <img src="site/img/pablo.png" alt="Мужские стрижки" />
+              <a href="mens-haircuts.html" class="service-card__image">
+                <img src="site/img/pablo.png" alt="Мужские стрижки в Абакане" />
               </a>
 
               <div class="service-card__head">
@@ -246,13 +232,17 @@
                 Точная геометрия, идеальный фейд и форма, которая легко
                 укладывается дома.
               </p>
+
+              <a href="mens-haircuts.html" class="service-card__btn">
+                Подробнее
+              </a>
             </article>
 
             <article class="service-card">
-              <a href="#contacts" class="service-card__image">
+              <a href="womens-haircuts.html" class="service-card__image">
                 <img
                   src="site/img/3d017bfd-8a01-4392-a827-17114d34226d.png"
-                  alt="Женские стрижки"
+                  alt="Женские стрижки в Абакане"
                 />
               </a>
 
@@ -265,13 +255,17 @@
                 Архитектурные стрижки, подчеркивающие текстуру волос и черты
                 лица.
               </p>
+
+              <a href="womens-haircuts.html" class="service-card__btn">
+                Подробнее
+              </a>
             </article>
 
             <article class="service-card">
-              <a href="#contacts" class="service-card__image">
+              <a href="coloring.html" class="service-card__image">
                 <img
                   src="site/img/7a68a521-d1ac-420b-850c-14e0c0b535b9.png"
-                  alt="Окрашивание"
+                  alt="Окрашивание волос в Абакане"
                 />
               </a>
 
@@ -284,13 +278,17 @@
                 Сложные техники: балаяж, шатуш, airtouch, а также безупречный
                 total blond.
               </p>
+
+              <a href="coloring.html" class="service-card__btn">
+                Подробнее
+              </a>
             </article>
 
             <article class="service-card">
-              <a href="#contacts" class="service-card__image">
+              <a href="styling.html" class="service-card__image">
                 <img
                   src="site/img/ca13e531-3aff-44bb-a18c-29a47f23dff2.png"
-                  alt="Укладка и стайлинг"
+                  alt="Укладка и стайлинг в Абакане"
                 />
               </a>
 
@@ -303,12 +301,14 @@
                 Объемные локоны, вечерние прически или легкая небрежность на
                 каждый день.
               </p>
+
+              <a href="styling.html" class="service-card__btn">
+                Подробнее
+              </a>
             </article>
           </div>
         </div>
       </section>
-
-      <!-- контакты -->
 
       <section class="contacts" id="contacts">
         <div class="contacts__container">
@@ -323,7 +323,8 @@
                 <div>
                   <span>Адрес</span>
                   <p>
-                    проспект Дружбы Народов, 49а<br />Абакан, Республика Хакасия
+                    проспект Дружбы Народов, 49а<br />
+                    Абакан, Республика Хакасия
                   </p>
                 </div>
               </div>
@@ -441,8 +442,6 @@
       </section>
     </main>
 
-    <!-- футер -->
-
     <footer class="footer">
       <div class="footer__container">
         <div class="footer__top">
@@ -510,103 +509,107 @@
 
     <script src="site/scripts/main.js"></script>
     <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "@id": "https://style-abakan.ru/#hairsalon",
+    "name": "Парикмахерская СТИЛЬ",
+    "alternateName": "СТИЛЬ",
+    "description": "Парикмахерская СТИЛЬ в Абакане: мужские и женские стрижки, окрашивание волос, укладки и профессиональный уход.",
+    "url": "https://style-abakan.ru/",
+    "image": "https://style-abakan.ru/site/img/og-image.jpg",
+    "logo": "https://style-abakan.ru/site/img/logo.png",
+    "telephone": "+79832719717",
+    "priceRange": "₽₽",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "проспект Дружбы Народов, 49А",
+      "addressLocality": "Абакан",
+      "addressRegion": "Республика Хакасия",
+      "postalCode": "655016",
+      "addressCountry": "RU"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 53.742277,
+      "longitude": 91.415582
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Абакан"
+    },
+    "openingHoursSpecification": [
       {
-        "@context": "https://schema.org",
-        "@type": "HairSalon",
-        "@id": "https://style-abakan.ru/#hairsalon",
-        "name": "Парикмахерская СТИЛЬ",
-        "alternateName": "СТИЛЬ",
-        "description": "Парикмахерская СТИЛЬ в Абакане: мужские и женские стрижки, окрашивание волос, укладки и профессиональный уход.",
-        "url": "https://style-abakan.ru/",
-        "image": "https://style-abakan.ru/site/img/og-image.jpg",
-        "logo": "https://style-abakan.ru/site/img/logo.png",
-        "telephone": "+79832719717",
-        "priceRange": "₽₽",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "проспект Дружбы Народов, 49А",
-          "addressLocality": "Абакан",
-          "addressRegion": "Республика Хакасия",
-          "postalCode": "655016",
-          "addressCountry": "RU"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 53.742277,
-          "longitude": 91.415582
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Абакан"
-        },
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "opens": "09:00",
-            "closes": "20:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "Sunday",
-            "opens": "10:00",
-            "closes": "18:00"
-          }
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
         ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Услуги парикмахерской СТИЛЬ",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "name": "Мужские стрижки",
-              "price": "500",
-              "priceCurrency": "RUB",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Мужские стрижки"
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Женские стрижки",
-              "price": "1200",
-              "priceCurrency": "RUB",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Женские стрижки"
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Окрашивание волос",
-              "price": "2500",
-              "priceCurrency": "RUB",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Окрашивание волос"
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Укладка и стайлинг",
-              "price": "1000",
-              "priceCurrency": "RUB",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Укладка и стайлинг"
-              }
-            }
-          ]
-        }
+        "opens": "09:00",
+        "closes": "20:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "10:00",
+        "closes": "18:00"
       }
-    </script>
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Услуги парикмахерской СТИЛЬ",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Мужские стрижки",
+          "price": "500",
+          "priceCurrency": "RUB",
+          "url": "https://style-abakan.ru/mens-haircuts.html",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Мужские стрижки"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Женские стрижки",
+          "price": "1200",
+          "priceCurrency": "RUB",
+          "url": "https://style-abakan.ru/womens-haircuts.html",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Женские стрижки"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Окрашивание волос",
+          "price": "2500",
+          "priceCurrency": "RUB",
+          "url": "https://style-abakan.ru/coloring.html",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Окрашивание волос"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Укладка и стайлинг",
+          "price": "1000",
+          "priceCurrency": "RUB",
+          "url": "https://style-abakan.ru/styling.html",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Укладка и стайлинг"
+          }
+        }
+      ]
+    }
+  }
+</script>
   </body>
 </html>
