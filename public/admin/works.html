@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Портфолио | ShumDev Custom CMS</title>
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+    <script src="/site/js/admin/common.js" defer></script>
+    <script src="/site/js/admin/works.js" defer></script>
+  </head>
+
+  <body class="admin-body" data-admin-page="works">
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="admin-sidebar__brand" href="/admin/works">
+          <span>ShumDev Custom CMS</span>
+          <strong>СТИЛЬ</strong>
+        </a>
+
+        <nav class="admin-sidebar__nav" aria-label="Админ-панель">
+          <a href="/admin/works" data-admin-nav="works">Портфолио</a>
+          <a href="/admin/requests" data-admin-nav="requests">Заявки</a>
+        </nav>
+
+        <button type="button" class="admin-sidebar__logout" data-admin-logout>
+          Выйти
+        </button>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-topbar">
+          <div>
+            <p class="admin-eyebrow">Каталог</p>
+            <h1>Портфолио</h1>
+          </div>
+
+          <a class="admin-button" href="/admin/work-edit">Добавить работу</a>
+        </header>
+
+        <section class="admin-panel">
+          <div class="admin-panel__head">
+            <div>
+              <h2>Работы</h2>
+              <p id="worksCount">Загрузка...</p>
+            </div>
+
+            <a
+              class="admin-link"
+              href="/portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Открыть на сайте
+            </a>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th scope="col">Работа</th>
+                  <th scope="col">Slug</th>
+                  <th scope="col">Фото</th>
+                  <th scope="col">Статус</th>
+                  <th scope="col">Порядок</th>
+                  <th scope="col" aria-label="Действия"></th>
+                </tr>
+              </thead>
+              <tbody id="worksTableBody">
+                <tr>
+                  <td colspan="6">Загружаем работы...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="admin-empty" id="worksEmpty" hidden>
+            Работ пока нет. Добавьте первую работу в портфолио.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

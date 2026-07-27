@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Портфолио парикмахерской СТИЛЬ в Абакане</title>
+    <meta
+      name="description"
+      content="Работы мастеров парикмахерской СТИЛЬ в Абакане: стрижки, окрашивания и укладки."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://style-abakan.ru/portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="СТИЛЬ" />
+    <meta
+      property="og:title"
+      content="Портфолио парикмахерской СТИЛЬ в Абакане"
+    />
+    <meta
+      property="og:description"
+      content="Стрижки, окрашивания и укладки мастеров парикмахерской СТИЛЬ."
+    />
+    <meta
+      property="og:image"
+      content="https://style-abakan.ru/site/img/logo.png"
+    />
+    <meta property="og:url" content="https://style-abakan.ru/portfolio" />
+    <link rel="icon" type="image/png" href="/site/img/logo.png" />
+    <link rel="stylesheet" href="/site/css/portfolio.min.css" />
+    <script src="/site/js/main.js" defer></script>
+    <script src="/site/js/portfolio.js" defer></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header__container">
+        <a class="header__logo" href="/">СТИЛЬ</a>
+
+        <nav
+          class="header__nav header__nav--desktop"
+          aria-label="Основная навигация"
+        >
+          <ul>
+            <li><a href="/#services">Услуги</a></li>
+            <li><a href="/#about">О нас</a></li>
+            <li><a href="/portfolio" aria-current="page">Портфолио</a></li>
+            <li><a href="/#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+
+        <a class="header__btn" href="/#contacts">Онлайн запись</a>
+
+        <button
+          class="header__burger"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu-overlay"></div>
+
+    <nav
+      class="mobile-menu"
+      id="mobile-menu"
+      aria-label="Мобильная навигация"
+    >
+      <ul>
+        <li><a href="/#services">Услуги</a></li>
+        <li><a href="/#about">О нас</a></li>
+        <li><a href="/portfolio" aria-current="page">Портфолио</a></li>
+        <li><a href="/#contacts">Контакты</a></li>
+      </ul>
+
+      <div class="mobile-menu__actions">
+        <a
+          class="mobile-menu__btn mobile-menu__btn--call"
+          href="tel:+79832719717"
+        >
+          Позвонить
+        </a>
+        <a
+          class="mobile-menu__btn mobile-menu__btn--signup"
+          href="/#contacts"
+        >
+          Записаться
+        </a>
+      </div>
+    </nav>
+
+    <main class="portfolio-page">
+      <section class="portfolio-hero">
+        <div class="portfolio-page__container">
+          <p class="portfolio-page__eyebrow">Работы мастеров</p>
+          <h1>Портфолио</h1>
+          <p>
+            Стрижки, окрашивания и укладки, выполненные мастерами
+            парикмахерской «СТИЛЬ».
+          </p>
+        </div>
+      </section>
+
+      <section class="portfolio-list" aria-labelledby="portfolioTitle">
+        <div class="portfolio-page__container">
+          <h2 class="portfolio-list__title" id="portfolioTitle">
+            Последние работы
+          </h2>
+
+          <div
+            class="portfolio-list__grid"
+            id="portfolioGrid"
+            aria-live="polite"
+          >
+            <p class="portfolio-list__loading">Загружаем работы...</p>
+          </div>
+
+          <p class="portfolio-list__empty" id="portfolioEmpty" hidden>
+            Скоро здесь появятся новые работы.
+          </p>
+        </div>
+      </section>
+
+      <section class="portfolio-cta">
+        <div class="portfolio-page__container portfolio-cta__inner">
+          <div>
+            <p>Подберём подходящий образ</p>
+            <h2>Запишитесь на консультацию</h2>
+          </div>
+          <a class="portfolio-page__button" href="/#contacts">Записаться</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__top">
+          <a href="/" class="footer__logo">СТИЛЬ</a>
+          <div class="footer__socials">
+            <a
+              href="https://max.ru/..."
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="MAX"
+            >
+              <img src="/site/img/MAX.svg" alt="Контакты в MAX" />
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <div class="footer__legal">
+            <p class="footer__copyright">
+              © 2026 СТИЛЬ. Все права защищены.<br />
+              Самозанятая: Гарманова Татьяна Алексеевна, ИНН: 191103616837
+            </p>
+            <p>
+              Информация на сайте носит информационный характер и не является
+              публичной офертой.
+            </p>
+          </div>
+          <div class="footer__links">
+            <a href="/privacy-policy.html">Политика конфиденциальности</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a class="floating-call" href="tel:+79832719717" aria-label="Позвонить">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"
+        />
+      </svg>
+      <span>Позвонить</span>
+    </a>
+  </body>
+</html>

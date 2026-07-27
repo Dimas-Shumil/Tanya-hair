@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Работа | ShumDev Custom CMS</title>
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+    <script src="/site/js/admin/common.js" defer></script>
+    <script src="/site/js/admin/work-edit.js" defer></script>
+  </head>
+
+  <body class="admin-body" data-admin-page="works">
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="admin-sidebar__brand" href="/admin/works">
+          <span>ShumDev Custom CMS</span>
+          <strong>СТИЛЬ</strong>
+        </a>
+
+        <nav class="admin-sidebar__nav" aria-label="Админ-панель">
+          <a href="/admin/works" data-admin-nav="works">Портфолио</a>
+          <a href="/admin/requests" data-admin-nav="requests">Заявки</a>
+        </nav>
+
+        <button type="button" class="admin-sidebar__logout" data-admin-logout>
+          Выйти
+        </button>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-topbar">
+          <div>
+            <p class="admin-eyebrow">Портфолио</p>
+            <h1 id="workEditTitle">Новая работа</h1>
+          </div>
+
+          <a class="admin-button admin-button--ghost" href="/admin/works">
+            Назад
+          </a>
+        </header>
+
+        <form id="workForm" class="admin-edit-layout">
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <div>
+                <h2>Основная информация</h2>
+                <p>Эти данные заполняют страницу работы по slug.</p>
+              </div>
+            </div>
+
+            <div class="admin-form-grid">
+              <label class="admin-field">
+                <span>Название работы *</span>
+                <input
+                  type="text"
+                  name="title"
+                  minlength="2"
+                  maxlength="120"
+                  required
+                />
+              </label>
+
+              <label class="admin-field">
+                <span>Slug *</span>
+                <input
+                  type="text"
+                  name="slug"
+                  pattern="[a-z0-9]+(?:-[a-z0-9]+)*"
+                  maxlength="100"
+                  placeholder="okrashivanie-airtouch"
+                  required
+                />
+                <small>Латиница, цифры и дефисы. Адрес: /work/slug</small>
+              </label>
+
+              <label class="admin-field">
+                <span>Категория</span>
+                <input
+                  type="text"
+                  name="category"
+                  maxlength="80"
+                  placeholder="Окрашивание"
+                />
+              </label>
+
+              <label class="admin-field">
+                <span>Порядок</span>
+                <input
+                  type="number"
+                  name="sortOrder"
+                  min="0"
+                  max="10000"
+                  value="100"
+                />
+              </label>
+            </div>
+
+            <label class="admin-field">
+              <span>Краткое описание</span>
+              <textarea
+                name="shortDescription"
+                rows="3"
+                maxlength="500"
+              ></textarea>
+            </label>
+
+            <label class="admin-field">
+              <span>Полное описание</span>
+              <textarea
+                name="description"
+                rows="8"
+                maxlength="6000"
+              ></textarea>
+            </label>
+
+            <div class="admin-form-grid">
+              <label class="admin-field">
+                <span>SEO-заголовок</span>
+                <input type="text" name="seoTitle" maxlength="120" />
+              </label>
+
+              <label class="admin-field">
+                <span>SEO-описание</span>
+                <textarea
+                  name="seoDescription"
+                  rows="3"
+                  maxlength="180"
+                ></textarea>
+              </label>
+            </div>
+
+            <label class="admin-checkbox">
+              <input type="checkbox" name="isPublished" />
+              <span>
+                <strong>Опубликовать работу</strong>
+                <small>Работа появится в портфолио и откроется по slug.</small>
+              </span>
+            </label>
+          </section>
+
+          <section class="admin-panel">
+            <div class="admin-panel__head">
+              <div>
+                <h2>Фотографии</h2>
+                <p>Первое фото в списке используется как обложка.</p>
+              </div>
+            </div>
+
+            <label class="admin-dropzone" id="workDropzone">
+              <input
+                type="file"
+                id="workImageInput"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+              />
+              <strong>Перетащите фотографии сюда</strong>
+              <span>или нажмите, чтобы выбрать файлы</span>
+              <small>JPG, PNG, WEBP · до 8 МБ · максимум 20 фото</small>
+            </label>
+
+            <div class="admin-pending-files" id="pendingFiles" hidden></div>
+
+            <div class="admin-gallery" id="workGallery"></div>
+
+            <p class="admin-empty" id="workGalleryEmpty">
+              Фотографий пока нет. Добавьте их перед публикацией.
+            </p>
+          </section>
+
+          <p
+            class="admin-message admin-message--error"
+            id="workFormError"
+            role="alert"
+            hidden
+          ></p>
+          <p
+            class="admin-message admin-message--success"
+            id="workFormSuccess"
+            role="status"
+            hidden
+          ></p>
+
+          <div class="admin-sticky-actions">
+            <button class="admin-button" type="submit" id="workSaveButton">
+              Сохранить
+            </button>
+            <a class="admin-button admin-button--ghost" href="/admin/works">
+              Отмена
+            </a>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

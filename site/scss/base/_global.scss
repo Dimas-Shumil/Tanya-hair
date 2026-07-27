@@ -1,0 +1,97 @@
+
+$black-main: #050505;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  ::selection {
+    background: #ffb347;
+    color: #000;
+    text-shadow: none;
+  }
+
+  ::-moz-selection {
+    background: #ffb347;
+    color: #000;
+    text-shadow: none;
+  }
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+@font-face {
+  font-family: inter;
+  src: url(../fonts/Inter_18pt-Medium.ttf);
+}
+
+@font-face {
+  font-family: oswald;
+  src: url(../fonts/Oswald-Medium.ttf);
+}
+
+@font-face {
+  font-family: russoone;
+  src: url(../fonts/RussoOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: CutiveMono;
+  src: url(../fonts/CutiveMono-Regular.ttf);
+}
+
+/* ===== SCROLLBAR ===== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $black-main;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #fff4c8 0%,
+    #efe2b2 35%,
+    #d6b13f 70%,
+    #8f6f1f 100%
+  );
+
+  border-radius: 20px;
+  border: 2px solid $black-main;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #fff7d8 0%,
+    #f6e6b0 30%,
+    #e1be55 65%,
+    #9f7d28 100%
+  );
+}
+
+/* Firefox */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d6b13f $black-main;
+}

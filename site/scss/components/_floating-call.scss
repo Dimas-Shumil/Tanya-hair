@@ -1,0 +1,81 @@
+
+// кнопка позвонить
+.floating-call {
+  position: fixed;
+  right: 22px;
+  bottom: calc(22px + env(safe-area-inset-bottom));
+  z-index: 1000;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+
+  background: rgba(20, 20, 20, 0.82);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  color: #fff;
+  text-decoration: none;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+
+    fill: #d6b13f;
+
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+
+    background: rgba(28, 28, 28, 0.92);
+
+    border-color: rgba(214, 177, 63, 0.22);
+
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.42),
+      0 0 30px rgba(214, 177, 63, 0.12);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@media (max-width: 576px) {
+  .floating-call {
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+
+    padding: 13px 16px;
+
+    span {
+      font-size: 13px;
+    }
+  }
+}

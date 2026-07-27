@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Вход | ShumDev Custom CMS</title>
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+    <script src="/site/js/admin/login.js" defer></script>
+  </head>
+
+  <body>
+    <main class="admin-login">
+      <section class="admin-login__card">
+        <div class="admin-login__brand">
+          <p class="admin-eyebrow">ShumDev Custom CMS</p>
+          <h1>СТИЛЬ</h1>
+          <p>Заявки и портфолио парикмахерской.</p>
+        </div>
+
+        <form id="adminLoginForm" class="admin-login__form">
+          <label class="admin-field">
+            <span>Логин</span>
+            <input
+              type="text"
+              name="login"
+              autocomplete="username"
+              maxlength="100"
+              required
+            />
+          </label>
+
+          <label class="admin-field">
+            <span>Пароль</span>
+            <input
+              type="password"
+              name="password"
+              autocomplete="current-password"
+              maxlength="200"
+              required
+            />
+          </label>
+
+          <p
+            class="admin-message admin-message--error"
+            id="adminLoginError"
+            role="alert"
+            hidden
+          ></p>
+
+          <button class="admin-button admin-button--wide" type="submit">
+            Войти
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

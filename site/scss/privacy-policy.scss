@@ -1,0 +1,161 @@
+// Entry point: политика конфиденциальности.
+@use "./base/global";
+@use "./layout/header";
+@use "./layout/footer";
+
+$policy-bg: #050505;
+$policy-surface: #0b0a08;
+$policy-text: #f7f2e8;
+$policy-soft: rgba(247, 242, 232, 0.84);
+$policy-muted: rgba(247, 242, 232, 0.62);
+$policy-gold: #d6b13f;
+$policy-gold-light: #f0d98a;
+$policy-line: rgba(239, 226, 178, 0.18);
+
+.policy {
+  min-height: 100vh;
+  padding: 96px 32px 120px;
+  color: $policy-text;
+  background:
+    radial-gradient(circle at 14% 0%, rgba(214, 177, 63, 0.1), transparent 36%),
+    $policy-bg;
+
+  &__container {
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    max-width: 940px;
+  }
+
+  &__eyebrow {
+    margin: 0 0 18px;
+    color: $policy-gold;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0 0 20px;
+    color: $policy-text;
+    font-family: serif;
+    font-size: clamp(44px, 6vw, 86px);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  &__date {
+    margin: 0 0 46px;
+    color: $policy-muted;
+  }
+
+  h2 {
+    margin: 54px 0 16px;
+    color: $policy-text;
+    font-family: serif;
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  p,
+  li {
+    color: $policy-soft;
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.75;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  ul {
+    margin: 12px 0 22px;
+    padding-left: 24px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  a {
+    color: $policy-gold;
+    text-decoration: none;
+
+    &:hover {
+      color: $policy-gold-light;
+    }
+  }
+
+  strong {
+    color: $policy-text;
+    font-weight: 700;
+  }
+
+  &__note {
+    margin: 34px 0;
+    padding: 26px;
+    border: 1px solid $policy-line;
+    background: rgba(214, 177, 63, 0.07);
+  }
+
+  &__back {
+    display: inline-flex;
+    min-width: 214px;
+    min-height: 62px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 52px;
+    padding: 20px 28px;
+    border: 1px solid $policy-gold;
+    background: $policy-gold;
+    color: $policy-bg;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.25s ease;
+
+    &:hover {
+      border-color: $policy-gold-light;
+      background: $policy-gold-light;
+      color: $policy-bg;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .policy {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .policy {
+    padding: 68px 16px 82px;
+
+    h2 {
+      margin-top: 42px;
+    }
+
+    &__note {
+      padding: 20px;
+    }
+
+    &__back {
+      width: 100%;
+      min-width: 0;
+      min-height: 56px;
+      padding: 18px 20px;
+      font-size: 12px;
+    }
+  }
+}

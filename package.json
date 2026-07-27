@@ -1,0 +1,46 @@
+{
+  "name": "style-abakan",
+  "version": "2.0.0",
+  "description": "Сайт и ShumDev Custom CMS парикмахерской СТИЛЬ",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "scss": "sass --watch site/scss/main.scss:site/css/main.min.css site/scss/service-pages.scss:site/css/service-pages.min.css site/scss/admin.scss:site/css/admin.min.css site/scss/portfolio.scss:site/css/portfolio.min.css site/scss/work.scss:site/css/work.min.css site/scss/privacy-policy.scss:site/css/privacy-policy.min.css --style=compressed --no-source-map",
+    "build:css": "sass site/scss/main.scss:site/css/main.css site/scss/service-pages.scss:site/css/service-pages.css site/scss/admin.scss:site/css/admin.css site/scss/portfolio.scss:site/css/portfolio.css site/scss/work.scss:site/css/work.css site/scss/privacy-policy.scss:site/css/privacy-policy.css --style=expanded --no-source-map && sass site/scss/main.scss:site/css/main.min.css site/scss/service-pages.scss:site/css/service-pages.min.css site/scss/admin.scss:site/css/admin.min.css site/scss/portfolio.scss:site/css/portfolio.min.css site/scss/work.scss:site/css/work.min.css site/scss/privacy-policy.scss:site/css/privacy-policy.min.css --style=compressed --no-source-map",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "node prisma/ensure-database.js && prisma migrate deploy",
+    "prisma:seed": "prisma db seed",
+    "prisma:studio": "prisma studio",
+    "admin:hash": "node prisma/hash-password.js",
+    "test:smoke": "node tests/smoke.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "keywords": [],
+  "author": "ShumDev",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "prisma": "6.19.3",
+    "sass": "^1.89.2"
+  }
+}

@@ -1,0 +1,570 @@
+// Entry point: детальная страница работы и страницы ошибок.
+@use "./base/global";
+@use "./layout/header";
+@use "./layout/footer";
+@use "./components/floating-call";
+
+$work-bg: #050505;
+$work-surface: #0b0a08;
+$work-text: #f7f2e8;
+$work-text-soft: rgba(247, 242, 232, 0.82);
+$work-text-muted: rgba(247, 242, 232, 0.62);
+$work-gold: #d6b13f;
+$work-gold-light: #f0d98a;
+$work-line: rgba(239, 226, 178, 0.18);
+
+// ЧЁРНЫЕ / ФОН
+$black-main: #050505;
+$black-soft: #0b0a08;
+$black-warm: #120d09;
+$graphite: #181614;
+
+// БЕЛЫЕ / ТЕКСТ
+$white-main: #f7f2e8;
+$white-soft: rgba(247, 242, 232, 0.82);
+$white-muted: rgba(247, 242, 232, 0.62);
+
+// ЗОЛОТО / ШАМПАНЬ
+$gold-main: #d6b13f;
+$gold-light: #f0d98a;
+$gold-soft: #c9a64a;
+$gold-dark: #8f6f1f;
+
+$champagne-main: #efe2b2;
+$champagne-light: #fff4c8;
+$champagne-muted: #bda66f;
+
+// БРОНЗА / ТЁПЛЫЕ АКЦЕНТЫ
+$bronze-base: #7a5734;
+$bronze-light: #a77a47;
+$bronze-dark: #3b2818;
+
+// ПРОЗРАЧНЫЕ ВЕРСИИ
+$gold-glow-color: rgba(214, 177, 63, 0.32);
+$gold-soft-color: rgba(214, 177, 63, 0.14);
+$champagne-soft: rgba(239, 226, 178, 0.18);
+$dark-glass: rgba(5, 5, 5, 0.48);
+
+// ЗАТЕМНЕНИЕ
+$overlay-dark: rgba(0, 0, 0, 0.72);
+$overlay-deep: rgba(0, 0, 0, 0.86);
+$overlay-light: rgba(0, 0, 0, 0.38);
+
+// ГРАДИЕНТЫ
+$gold-gradient: linear-gradient(
+  180deg,
+  #fff4c8 0%,
+  #f0d98a 28%,
+  #d6b13f 58%,
+  #8f6f1f 100%
+);
+
+$champagne-gradient: linear-gradient(
+  135deg,
+  #fff4c8 0%,
+  #efe2b2 35%,
+  #d6b13f 70%,
+  #8f6f1f 100%
+);
+
+$dark-bg-gradient: linear-gradient(
+  120deg,
+  #050505 0%,
+  #0b0a08 35%,
+  #120d09 58%,
+  #050505 100%
+);
+
+$gold-glow: radial-gradient(
+  circle at 22% 28%,
+  rgba(214, 177, 63, 0.22) 0%,
+  rgba(143, 111, 31, 0.12) 28%,
+  transparent 62%
+);
+
+$warm-glow: radial-gradient(
+  circle at 82% 38%,
+  rgba(167, 122, 71, 0.14) 0%,
+  transparent 52%
+);
+
+// ГРАНИЦЫ
+$border-light: rgba(239, 226, 178, 0.24);
+$border-gold: rgba(214, 177, 63, 0.48);
+$border-dark: rgba(255, 255, 255, 0.08);
+
+// ШРИФТЫ
+$inter: inter;
+$RussoOne: russoone;
+$oswald: oswald;
+$CutiveMono: CutiveMono;
+
+.work-page {
+  min-height: 100vh;
+  color: $work-text;
+  background: $work-bg;
+
+  &__container {
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+  }
+
+  &__section-head {
+    max-width: 760px;
+  }
+
+  &__section-label {
+    margin: 0 0 14px;
+    color: $work-gold;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__section-title {
+    margin: 0;
+    font-family: serif;
+    font-size: clamp(40px, 4vw, 68px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  &__button {
+    display: inline-flex;
+    min-width: 214px;
+    min-height: 62px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 38px;
+    padding: 20px 28px;
+    border: 1px solid $work-gold;
+    background: $work-gold;
+    color: $work-bg;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+
+    &:hover {
+      border-color: $work-gold-light;
+      background: $work-gold-light;
+    }
+  }
+}
+
+// первый экран
+
+.work-hero {
+  padding: 112px 32px 120px;
+  border-bottom: 1px solid $work-line;
+  background:
+    radial-gradient(
+      circle at 10% 18%,
+      rgba(214, 177, 63, 0.09),
+      transparent 28%
+    ),
+    $work-bg;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1fr);
+    align-items: center;
+    gap: clamp(56px, 8vw, 140px);
+  }
+
+  &__content {
+    min-width: 0;
+    max-width: 760px;
+  }
+
+  &__category {
+    margin: 0 0 20px;
+    color: $work-gold;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: serif;
+    font-size: clamp(56px, 7vw, 118px);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+  }
+
+  &__lead {
+    max-width: 720px;
+    margin: 30px 0 0;
+    color: $work-text-soft;
+    font-size: clamp(17px, 1.4vw, 22px);
+    line-height: 1.6;
+  }
+
+  &__image {
+    min-width: 0;
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid $work-line;
+    background: #000;
+  }
+
+  &__image-source {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// хлебные крошки
+
+.work-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+  color: $work-text-muted;
+  font-size: 13px;
+
+  &__link {
+    color: $work-gold;
+    text-decoration: none;
+    transition: color 0.25s ease;
+
+    &:hover {
+      color: $work-gold-light;
+    }
+  }
+
+  &__separator,
+  &__current {
+    margin: 0;
+  }
+}
+
+// описание работы
+
+.work-description {
+  padding: 120px 32px;
+  border-bottom: 1px solid $work-line;
+  background: $work-surface;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+    gap: clamp(56px, 8vw, 140px);
+    align-items: start;
+  }
+
+  &__text {
+    min-width: 0;
+    max-width: 920px;
+    color: $work-text-soft;
+    font-size: clamp(16px, 1.3vw, 20px);
+    line-height: 1.8;
+  }
+
+  &__paragraph {
+    margin: 0;
+
+    + .work-description__paragraph {
+      margin-top: 22px;
+    }
+  }
+}
+
+// галерея
+
+.work-gallery {
+  padding: 120px 32px;
+  background: $work-bg;
+
+  &__head {
+    margin-bottom: 40px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  &__item {
+    min-width: 0;
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid $work-line;
+    background: #000;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// запись
+
+.work-cta {
+  padding: 82px 32px;
+  border-top: 1px solid $work-line;
+  background: $work-surface;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  &__content {
+    min-width: 0;
+    max-width: 1050px;
+  }
+
+  &__label {
+    margin: 0 0 14px;
+    color: $work-gold;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: serif;
+    font-size: clamp(40px, 4vw, 68px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .work-page__button {
+    flex: 0 0 auto;
+    margin-top: 0;
+  }
+}
+
+// страницы ошибок
+
+.error-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  color: $work-text;
+  font-family: 'Inter', Arial, sans-serif;
+  text-align: center;
+  background: $work-bg;
+
+  &__content {
+    width: min(620px, 100%);
+    padding: 56px 28px;
+    border: 1px solid $work-gold;
+    background: $work-surface;
+  }
+
+  &__code {
+    margin: 0;
+    color: $work-gold;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+  }
+
+  &__title {
+    margin: 16px 0;
+    font-family: serif;
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  &__text {
+    margin: 0;
+    color: $work-text-muted;
+    line-height: 1.6;
+  }
+
+  &__button {
+    display: inline-flex;
+    min-width: 190px;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 18px 22px;
+    border: 1px solid $work-gold;
+    background: $work-gold;
+    color: $work-bg;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.25s ease;
+
+    &:hover {
+      border-color: $work-gold-light;
+      background: $work-gold-light;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .work-hero {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__content {
+      max-width: 900px;
+    }
+
+    &__image {
+      max-width: 900px;
+    }
+  }
+
+  .work-description {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .work-hero,
+  .work-description,
+  .work-gallery,
+  .work-cta {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .work-hero {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .work-description,
+  .work-gallery {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .work-cta {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+@media (max-width: 680px) {
+  .work-page {
+    &__section-title {
+      font-size: clamp(38px, 11vw, 54px);
+    }
+
+    &__button {
+      width: 100%;
+      min-width: 0;
+      min-height: 56px;
+      padding: 18px 20px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+    }
+  }
+
+  .work-hero {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__grid {
+      gap: 38px;
+    }
+
+    &__title {
+      font-size: clamp(48px, 15vw, 72px);
+    }
+
+    &__lead {
+      font-size: 16px;
+    }
+  }
+
+  .work-breadcrumbs {
+    margin-bottom: 34px;
+  }
+
+  .work-description {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__grid {
+      gap: 30px;
+    }
+  }
+
+  .work-gallery {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__head {
+      margin-bottom: 30px;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .work-cta {
+    padding-top: 64px;
+    padding-bottom: 64px;
+
+    &__inner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    &__title {
+      font-size: clamp(38px, 11vw, 54px);
+    }
+
+    .work-page__button {
+      flex: initial;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .work-hero,
+  .work-description,
+  .work-gallery,
+  .work-cta {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
