@@ -170,6 +170,18 @@ select:focus-visible {
   gap: 22px;
 }
 
+.admin-login__back {
+  align-self: center;
+  color: var(--admin-muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.admin-login__back:hover {
+  color: var(--admin-accent);
+}
+
 .admin-shell {
   display: grid;
   min-height: 100vh;
@@ -228,8 +240,15 @@ select:focus-visible {
   color: var(--admin-text);
 }
 
-.admin-sidebar__logout {
+.admin-sidebar__actions {
+  display: grid;
+  gap: 8px;
   margin-top: auto;
+}
+
+.admin-sidebar__site-button,
+.admin-sidebar__logout {
+  width: 100%;
   padding: 13px 15px;
   border: 1px solid var(--admin-line);
   border-radius: 2px;
@@ -237,11 +256,25 @@ select:focus-visible {
   color: var(--admin-muted);
   text-align: left;
   cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.admin-sidebar__site-button:hover {
+  border-color: var(--admin-accent);
+  background: rgba(214, 177, 63, 0.08);
+  color: var(--admin-accent);
 }
 
 .admin-sidebar__logout:hover {
   border-color: var(--admin-danger);
+  background: rgba(240, 113, 113, 0.06);
   color: var(--admin-danger);
+}
+
+.admin-sidebar__site-button:disabled,
+.admin-sidebar__logout:disabled {
+  opacity: 0.55;
+  cursor: wait;
 }
 
 .admin-main {
@@ -777,9 +810,16 @@ select:focus-visible {
     border-left: 0;
     border-bottom-color: var(--admin-accent);
   }
-  .admin-sidebar__logout {
+  .admin-sidebar__actions {
+    display: flex;
     margin: 0;
     align-self: center;
+    justify-self: end;
+  }
+  .admin-sidebar__site-button,
+  .admin-sidebar__logout {
+    width: auto;
+    white-space: nowrap;
   }
   .admin-main {
     padding: 28px 20px 54px;
@@ -793,6 +833,24 @@ select:focus-visible {
   }
 }
 @media (max-width: 640px) {
+  .admin-sidebar {
+    grid-template-columns: 1fr;
+  }
+  .admin-sidebar__actions {
+    grid-column: 1/-1;
+    grid-row: 2;
+    width: 100%;
+    justify-self: stretch;
+  }
+  .admin-sidebar__site-button,
+  .admin-sidebar__logout {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+  }
+  .admin-sidebar__nav {
+    grid-row: 3;
+  }
   .admin-login {
     padding: 14px;
   }

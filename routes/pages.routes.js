@@ -177,7 +177,7 @@ function renderWorkPage(template, work, siteUrl) {
 
 function createPagesRoutes({ prisma, environment, publicPath, rootPath }) {
   const router = express.Router();
-  const adminPath = path.join(publicPath, 'admin');
+  const adminPath = path.join(rootPath, 'admin-pages');
   const workTemplate = fs.readFileSync(path.join(publicPath, 'work.html'), 'utf8');
 
   router.get('/health', (req, res) => {

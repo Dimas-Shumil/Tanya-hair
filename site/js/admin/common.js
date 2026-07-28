@@ -3,6 +3,7 @@
 
   async function init() {
     const response = await fetch('/api/admin/session', {
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
       },
@@ -29,18 +30,77 @@
       );
     });
 
-    document.querySelector('[data-admin-logout]')?.addEventListener(
-      'click',
-      async () => {
-        try {
-          await api('/api/admin/logout', {
-            method: 'POST',
-          });
-        } finally {
-          window.location.replace('/admin/login');
-        }
-      },
+    bindSessionActions();
+  }
+
+  function bindSessionActions() {
+    const returnToSiteButton = document.querySelector(
+      '[data-admin-return-site]',
     );
+    const logoutButton = document.querySelector('[data-admin-logout]');
+    const actionButtons = [returnToSiteButton, logoutButton].filter(Boolean);
+
+    returnToSiteButton?.addEventListener('click', () => {
+      endSession({
+        redirectUrl: '/',
+        activeButton: returnToSiteButton,
+        loadingText: 'Переходим на сайт...',
+        actionButtons,
+      });
+    });
+
+    logoutButton?.addEventListener('click', () => {
+      endSession({
+        redirectUrl: '/admin/login',
+        activeButton: logoutButton,
+        loadingText: 'Выходим...',
+        actionButtons,
+      });
+    });
+  }
+
+  async function endSession({
+    redirectUrl,
+    activeButton,
+    loadingText,
+    actionButtons,
+  }) {
+    const originalText = activeButton.textContent;
+
+    actionButtons.forEach((button) => {
+      button.disabled = true;
+    });
+    activeButton.textContent = loadingText;
+
+    try {
+      const response = await fetch('/api/admin/logout', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          Accept: 'application/json',
+          'X-CSRF-Token': csrfToken,
+        },
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok && response.status !== 401) {
+        throw new Error(data.message || 'Не удалось завершить сессию.');
+      }
+
+      csrfToken = '';
+      window.location.replace(redirectUrl);
+    } catch (error) {
+      console.error('Admin logout error:', error);
+
+      actionButtons.forEach((button) => {
+        button.disabled = false;
+      });
+      activeButton.textContent = originalText;
+
+      window.alert(
+        error.message || 'Не удалось завершить сессию. Попробуйте ещё раз.',
+      );
+    }
   }
 
   async function api(url, options = {}) {
@@ -61,6 +121,7 @@
       ...options,
       method,
       headers,
+      credentials: 'same-origin',
     });
     const data = await response.json().catch(() => ({}));
 
