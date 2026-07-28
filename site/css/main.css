@@ -387,6 +387,13 @@ body.menu-open {
   max-width: 900px;
   gap: 12px;
 }
+.footer .footer__legal-link {
+  text-decoration: none;
+  color: rgba(247, 242, 232, 0.48);
+}
+.footer .footer__legal-link:hover {
+  color: #d6b13f;
+}
 .footer__legal p, .footer__copyright {
   margin: 0;
   color: rgba(247, 242, 232, 0.48);

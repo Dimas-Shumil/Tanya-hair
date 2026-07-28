@@ -83,6 +83,15 @@ $footer-line: rgba(255, 255, 255, 0.08);
     gap: 12px;
   }
 
+  .footer__legal-link {
+    text-decoration: none;
+    color: $footer-muted;
+    // color: red;
+    &:hover {
+      color: $footer-gold;
+    }
+  }
+
   &__legal p,
   &__copyright {
     margin: 0;
