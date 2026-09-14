@@ -44,8 +44,10 @@ model Lead {
   service      String
   page         String?
   status       String   @default("new")
-  mailSent     Boolean  @default(false)
-  createdAt    DateTime @default(now())
+  mailSent          Boolean   @default(false)
+  consentAcceptedAt DateTime?
+  consentVersion    String?
+  createdAt         DateTime  @default(now())
   updatedAt    DateTime @updatedAt
 
   @@index([status, createdAt])

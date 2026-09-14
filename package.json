@@ -15,7 +15,8 @@
     "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio",
     "admin:hash": "node prisma/hash-password.js",
-    "test:smoke": "node tests/smoke.js"
+    "test:smoke": "node tests/smoke.js",
+    "smtp:check": "node scripts/check-smtp.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -42,5 +43,8 @@
     "nodemon": "^3.1.14",
     "prisma": "6.19.3",
     "sass": "^1.89.2"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.1"
   }
 }

@@ -4,6 +4,8 @@ const nodemailer = require('nodemailer');
 const { asyncHandler, cleanText, escapeHtml } = require('../middleware/request.middleware');
 const { requireSameOrigin } = require('../middleware/admin.middleware');
 
+const CONSENT_VERSION = '2026-09-14';
+
 const allowedServices = new Set([
   'Стрижка мужская',
   'Стрижка женская',
@@ -40,6 +42,11 @@ function createMailService(environment) {
       user: environment.smtpUser,
       pass: environment.smtpPass,
     },
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 15_000,
+    disableFileAccess: true,
+    disableUrlAccess: true,
   });
 
   return {
@@ -99,6 +106,18 @@ function createPublicRoutes(prisma, environment) {
         console.log('SMTP готов к отправке писем');
       })
       .catch((error) => {
+        const response = `${error?.response || ''} ${error?.message || ''}`;
+        const needsApplicationPassword =
+          error?.code === 'EAUTH' ||
+          /application password|parol prilozheniya|парол[ья] приложения/i.test(response);
+
+        if (needsApplicationPassword) {
+          console.error(
+            'SMTP ошибка авторизации: для Mail.ru в SMTP_PASS нужен пароль внешнего приложения, а не основной пароль от почты.',
+          );
+          return;
+        }
+
         console.error('SMTP ошибка:', error.message);
       });
   }
@@ -247,6 +266,8 @@ function createPublicRoutes(prisma, environment) {
           phone: formattedPhone,
           service,
           page,
+          consentAcceptedAt: new Date(),
+          consentVersion: CONSENT_VERSION,
         },
       });
 

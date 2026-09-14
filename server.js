@@ -158,7 +158,7 @@ app.use((error, req, res, next) => {
   return res.status(500).sendFile(path.join(publicPath, '500.html'));
 });
 
-const server = app.listen(environment.port, 'localhost', () => {
+const server = app.listen(environment.port, '127.0.0.1', () => {
   console.log(`STYLE server started: http://localhost:${environment.port}`);
 });
 

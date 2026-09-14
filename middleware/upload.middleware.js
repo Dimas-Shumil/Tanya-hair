@@ -14,6 +14,10 @@ const workImagesUpload = multer({
     fileSize: 8 * 1024 * 1024,
     files: 12,
     fields: 10,
+    parts: 24,
+    fieldSize: 16 * 1024,
+    fieldNestingDepth: 0,
+    fieldArrayIndexLimit: 0,
   },
   fileFilter(req, file, callback) {
     if (!allowedMimeTypes.has(file.mimetype)) {
