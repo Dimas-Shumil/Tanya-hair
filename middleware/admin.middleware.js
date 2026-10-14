@@ -21,7 +21,7 @@ function isSameOrigin(req) {
   const origin = req.get('origin');
   const fetchSite = req.get('sec-fetch-site');
 
-  if (fetchSite && !['same-origin', 'same-site', 'none'].includes(fetchSite)) {
+  if (fetchSite && !['same-origin', 'none'].includes(fetchSite)) {
     return false;
   }
 
@@ -30,7 +30,9 @@ function isSameOrigin(req) {
   }
 
   try {
-    return new URL(origin).host === req.get('host');
+    const originUrl = new URL(origin);
+    const expectedProtocol = req.protocol === 'https:' ? 'https:' : `${req.protocol}:`;
+    return originUrl.host === req.get('host') && originUrl.protocol === expectedProtocol;
   } catch {
     return false;
   }
@@ -66,7 +68,9 @@ function requireCsrf(req, res, next) {
   const sessionToken = req.session?.csrfToken;
   const requestToken = req.get('X-CSRF-Token');
 
-  if (!safeEqual(sessionToken, requestToken)) {
+  if (typeof sessionToken !== 'string' || !sessionToken ||
+      typeof requestToken !== 'string' || !requestToken ||
+      !safeEqual(sessionToken, requestToken)) {
     return res.status(403).json({
       message: 'Сессия устарела. Обновите страницу и повторите действие.',
     });

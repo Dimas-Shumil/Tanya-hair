@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       viewLink.textContent = 'Открыть';
       viewLink.hidden = !work.isPublished;
       deleteButton.type = 'button';
-      deleteButton.className = 'is-danger';
+      deleteButton.className = 'admin-delete-button is-danger';
       deleteButton.textContent = 'Удалить';
       deleteButton.addEventListener('click', async () => {
-        if (!window.confirm(`Удалить работу «${work.title}»?`)) {
+        if (!await window.StyleAdmin.confirmDelete(`Удалить работу «${work.title}»? Это действие нельзя отменить.`)) {
           return;
         }
 
@@ -107,6 +107,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       actions.append(editLink, viewLink, deleteButton);
       actionsCell.append(actions);
+      [workCell, slugCell, photosCell, statusCell, orderCell, actionsCell]
+        .forEach((cell, index) => { cell.dataset.label = ['Работа', 'Slug', 'Фото', 'Статус', 'Порядок', 'Действия'][index]; });
       row.append(
         workCell,
         slugCell,

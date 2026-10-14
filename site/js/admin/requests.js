@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       dateCell.append(date, mailState);
 
       deleteButton.type = 'button';
-      deleteButton.className = 'admin-text-button is-danger';
+      deleteButton.className = 'admin-delete-button is-danger';
       deleteButton.textContent = 'Удалить';
       deleteButton.addEventListener('click', async () => {
         if (
-          !window.confirm(
+          !await window.StyleAdmin.confirmDelete(
             `Удалить заявку от ${request.customerName}? Это действие нельзя отменить.`,
           )
         ) {
@@ -149,6 +149,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
       actionsCell.append(deleteButton);
+      [clientCell, serviceCell, pageCell, statusCell, dateCell, actionsCell]
+        .forEach((cell, index) => { cell.dataset.label = ['Клиент', 'Услуга', 'Страница', 'Статус', 'Дата', 'Действия'][index]; });
       row.append(
         clientCell,
         serviceCell,

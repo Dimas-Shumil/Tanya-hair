@@ -7,11 +7,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const dropzone = document.getElementById('workDropzone');
   const fileInput = document.getElementById('workImageInput');
   const pendingElement = document.getElementById('pendingFiles');
+  const pendingGroup = document.getElementById('pendingGroup');
+  const savedPhotosHeading = document.getElementById('savedPhotosHeading');
   const galleryElement = document.getElementById('workGallery');
   const galleryEmpty = document.getElementById('workGalleryEmpty');
   const params = new URLSearchParams(window.location.search);
   let workId = Number(params.get('id')) || null;
   let pendingFiles = [];
+  const previewUrls = new Map();
   let currentImages = [];
   let draggedImageId = null;
   let slugWasEdited = false;
@@ -25,6 +28,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     !dropzone ||
     !fileInput ||
     !pendingElement ||
+    !pendingGroup ||
+    !savedPhotosHeading ||
     !galleryElement ||
     !galleryEmpty
   ) {
@@ -40,6 +45,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     showMessage('error', error.message);
   }
+
+  window.addEventListener('pagehide', () => {
+    previewUrls.forEach((url) => URL.revokeObjectURL(url));
+    previewUrls.clear();
+  });
 
   form.elements.title.addEventListener('input', () => {
     if (!slugWasEdited) {
@@ -175,89 +185,104 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function addPendingFiles(fileList) {
-    const acceptedTypes = new Set([
-      'image/jpeg',
-      'image/png',
-      'image/webp',
-    ]);
     const files = Array.from(fileList || []);
+    if (!files.length) return;
+
+    const acceptedTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
     const invalidFile = files.find(
       (file) => !acceptedTypes.has(file.type) || file.size > 8 * 1024 * 1024,
     );
-
     if (invalidFile) {
-      showMessage(
-        'error',
-        'Можно добавлять JPG, PNG и WEBP размером не больше 8 МБ.',
-      );
+      showMessage('error', 'Разрешены JPG, PNG и WEBP не больше 8 МБ каждый.');
       return;
     }
-
     if (currentImages.length + pendingFiles.length + files.length > 20) {
       showMessage('error', 'Для одной работы можно сохранить не больше 20 фото.');
       return;
     }
 
-    pendingFiles.push(...files);
+    files.forEach((file) => {
+      pendingFiles.push(file);
+      previewUrls.set(file, URL.createObjectURL(file));
+    });
     renderPendingFiles();
+    showMessage();
   }
 
   function renderPendingFiles() {
-    pendingElement.innerHTML = '';
-    pendingElement.hidden = pendingFiles.length === 0;
+    pendingElement.replaceChildren();
+    pendingGroup.hidden = pendingFiles.length === 0;
 
     pendingFiles.forEach((file, index) => {
-      const item = document.createElement('div');
-      const info = document.createElement('span');
+      const card = document.createElement('div');
+      const preview = document.createElement('div');
+      const img = document.createElement('img');
+      const caption = document.createElement('div');
+      const name = document.createElement('strong');
+      const size = document.createElement('small');
       const removeButton = document.createElement('button');
 
-      item.className = 'admin-pending-file';
-      info.textContent = `${file.name} · ${formatBytes(file.size)}`;
+      card.className = 'admin-pending-card';
+      preview.className = 'admin-pending-card__preview';
+      img.src = previewUrls.get(file);
+      img.alt = file.name;
+      caption.className = 'admin-pending-card__caption';
+      name.textContent = file.name;
+      size.textContent = formatBytes(file.size);
+      caption.append(name, size);
       removeButton.type = 'button';
-      removeButton.textContent = 'Убрать';
+      removeButton.className = 'admin-photo-remove';
+      removeButton.textContent = '×';
+      removeButton.setAttribute('aria-label', `Убрать ${file.name} из загрузки`);
+      removeButton.title = 'Убрать фото';
       removeButton.addEventListener('click', () => {
+        URL.revokeObjectURL(previewUrls.get(file));
+        previewUrls.delete(file);
         pendingFiles.splice(index, 1);
         renderPendingFiles();
       });
-      item.append(info, removeButton);
-      pendingElement.append(item);
+      preview.append(img, removeButton);
+      card.append(preview, caption);
+      pendingElement.append(card);
     });
   }
 
   async function uploadPendingFiles() {
-    const formData = new FormData();
-    pendingFiles.forEach((file) => formData.append('images', file));
-
-    const data = await window.StyleAdmin.api(
-      `/api/admin/works/${workId}/images`,
-      {
-        method: 'POST',
-        body: formData,
-      },
-    );
-
-    pendingFiles = [];
-    currentImages = data.images;
-    renderPendingFiles();
-    renderGallery();
+    // Сервер разрешает до 12 файлов в одном запросе; общий лимит работы — 20.
+    while (pendingFiles.length) {
+      const batch = pendingFiles.slice(0, 12);
+      const formData = new FormData();
+      batch.forEach((file) => formData.append('images', file));
+      const data = await window.StyleAdmin.api(`/api/admin/works/${workId}/images`, {
+        method: 'POST', body: formData,
+      });
+      batch.forEach((file) => {
+        URL.revokeObjectURL(previewUrls.get(file));
+        previewUrls.delete(file);
+      });
+      pendingFiles = pendingFiles.slice(batch.length);
+      currentImages = data.images;
+      renderPendingFiles();
+      renderGallery();
+    }
   }
 
   function renderGallery() {
-    galleryElement.innerHTML = '';
+    galleryElement.replaceChildren();
     galleryEmpty.hidden = currentImages.length > 0;
+    savedPhotosHeading.hidden = currentImages.length === 0;
 
     currentImages.forEach((image, index) => {
       const card = document.createElement('article');
       const preview = document.createElement('div');
       const img = document.createElement('img');
-      const badge = document.createElement('span');
+      const deleteButton = document.createElement('button');
       const dragHandle = document.createElement('span');
       const altLabel = document.createElement('label');
       const altTitle = document.createElement('span');
       const altInput = document.createElement('input');
       const actions = document.createElement('div');
       const saveAltButton = document.createElement('button');
-      const deleteButton = document.createElement('button');
 
       card.className = 'admin-gallery-card';
       card.draggable = true;
@@ -268,13 +293,39 @@ document.addEventListener('DOMContentLoaded', async () => {
       preview.append(img);
 
       if (index === 0) {
+        const badge = document.createElement('span');
         badge.className = 'admin-gallery-card__cover';
         badge.textContent = 'Обложка';
         preview.append(badge);
       }
 
+      deleteButton.type = 'button';
+      deleteButton.className = 'admin-photo-remove';
+      deleteButton.textContent = '×';
+      deleteButton.title = 'Удалить фото';
+      deleteButton.setAttribute('aria-label', `Удалить фотографию ${index + 1}`);
+      deleteButton.addEventListener('click', async () => {
+        const approved = await window.StyleAdmin.confirmDelete('Удалить эту фотографию? Это действие нельзя отменить.');
+        if (!approved) return;
+        deleteButton.disabled = true;
+        try {
+          const result = await window.StyleAdmin.api(
+            `/api/admin/works/${workId}/images/${image.id}`,
+            { method: 'DELETE' },
+          );
+          currentImages = currentImages.filter((item) => item.id !== image.id);
+          if (result.unpublished) form.elements.isPublished.checked = false;
+          renderGallery();
+          showMessage('success', result.message || 'Фотография удалена.');
+        } catch (error) {
+          showMessage('error', error.message);
+          deleteButton.disabled = false;
+        }
+      });
+      preview.append(deleteButton);
+
       dragHandle.className = 'admin-gallery-card__drag';
-      dragHandle.textContent = 'Перетащите для изменения порядка';
+      dragHandle.textContent = 'Перетащите для изменения порядка на компьютере';
       altLabel.className = 'admin-field admin-field--compact';
       altTitle.textContent = 'Описание фото';
       altInput.type = 'text';
@@ -287,17 +338,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       saveAltButton.textContent = 'Сохранить текст';
       saveAltButton.addEventListener('click', async () => {
         saveAltButton.disabled = true;
-
         try {
-          await window.StyleAdmin.api(
-            `/api/admin/works/${workId}/images/${image.id}`,
-            {
-              method: 'PATCH',
-              body: JSON.stringify({
-                alt: altInput.value,
-              }),
-            },
-          );
+          await window.StyleAdmin.api(`/api/admin/works/${workId}/images/${image.id}`, {
+            method: 'PATCH', body: JSON.stringify({ alt: altInput.value }),
+          });
           image.alt = altInput.value.trim();
           showMessage('success', 'Описание фотографии сохранено.');
         } catch (error) {
@@ -306,34 +350,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           saveAltButton.disabled = false;
         }
       });
+      actions.append(saveAltButton);
 
-      deleteButton.type = 'button';
-      deleteButton.className = 'is-danger';
-      deleteButton.textContent = 'Удалить';
-      deleteButton.addEventListener('click', async () => {
-        if (!window.confirm('Удалить эту фотографию?')) {
+      card.addEventListener('dragstart', (event) => {
+        if (event.target.closest('button, input')) {
+          event.preventDefault();
           return;
         }
-
-        deleteButton.disabled = true;
-
-        try {
-          await window.StyleAdmin.api(
-            `/api/admin/works/${workId}/images/${image.id}`,
-            {
-              method: 'DELETE',
-            },
-          );
-          currentImages = currentImages.filter((item) => item.id !== image.id);
-          renderGallery();
-          showMessage('success', 'Фотография удалена.');
-        } catch (error) {
-          showMessage('error', error.message);
-          deleteButton.disabled = false;
-        }
-      });
-
-      card.addEventListener('dragstart', () => {
         draggedImageId = image.id;
         card.classList.add('is-dragging');
       });
@@ -341,42 +364,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         draggedImageId = null;
         card.classList.remove('is-dragging');
       });
-      card.addEventListener('dragover', (event) => {
-        event.preventDefault();
-      });
+      card.addEventListener('dragover', (event) => event.preventDefault());
       card.addEventListener('drop', async (event) => {
         event.preventDefault();
-
-        if (!draggedImageId || draggedImageId === image.id) {
-          return;
-        }
-
-        const fromIndex = currentImages.findIndex(
-          (item) => item.id === draggedImageId,
-        );
+        if (!draggedImageId || draggedImageId === image.id) return;
+        const fromIndex = currentImages.findIndex((item) => item.id === draggedImageId);
         const toIndex = currentImages.findIndex((item) => item.id === image.id);
+        if (fromIndex < 0 || toIndex < 0) return;
+        const previousOrder = [...currentImages];
         const [movedImage] = currentImages.splice(fromIndex, 1);
         currentImages.splice(toIndex, 0, movedImage);
         renderGallery();
-
         try {
-          await window.StyleAdmin.api(
-            `/api/admin/works/${workId}/images/order`,
-            {
-              method: 'PATCH',
-              body: JSON.stringify({
-                imageIds: currentImages.map((item) => item.id),
-              }),
-            },
-          );
+          await window.StyleAdmin.api(`/api/admin/works/${workId}/images/order`, {
+            method: 'PATCH',
+            body: JSON.stringify({ imageIds: currentImages.map((item) => item.id) }),
+          });
           showMessage('success', 'Порядок фотографий сохранён.');
         } catch (error) {
+          currentImages = previousOrder;
+          renderGallery();
           showMessage('error', error.message);
-          await loadWork();
         }
       });
 
-      actions.append(saveAltButton, deleteButton);
       card.append(preview, dragHandle, altLabel, actions);
       galleryElement.append(card);
     });

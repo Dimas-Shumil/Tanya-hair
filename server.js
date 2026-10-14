@@ -95,9 +95,32 @@ app.use(
   }),
 );
 
+app.use((req, res, next) => {
+  res.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  if (req.path.startsWith('/admin') || req.path.startsWith('/api/admin')) {
+    res.set('Cache-Control', 'no-store, private');
+    res.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  }
+  if (req.path.startsWith('/admin')) {
+    res.set('Content-Security-Policy',
+      "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self'; " +
+      "form-action 'self'; frame-ancestors 'none'; img-src 'self' data: blob:; " +
+      "object-src 'none'; script-src 'self'; style-src 'self'");
+  }
+  next();
+});
+
 app.use(createSessionMiddleware(prisma, environment));
 app.use(express.json({ limit: '100kb', strict: true }));
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
+
+app.use(['/site/js/admin', '/site/css/admin.css', '/site/css/admin.min.css'], (req, res, next) => {
+  res.set('Cache-Control', 'no-store, private');
+  next();
+});
+
+// Админка использует только скомпилированные CSS/JS, исходники SCSS не публикуем.
+app.use('/site/scss', (req, res) => res.sendStatus(404));
 
 app.use(
   '/site',
@@ -152,6 +175,9 @@ app.use((error, req, res, next) => {
   console.error('Unhandled request error:', error);
 
   if (req.path.startsWith('/api/')) {
+    if (error.type === 'entity.parse.failed' || error.type === 'entity.too.large') {
+      return res.status(error.status || 400).json({ message: 'Некорректное тело запроса.' });
+    }
     return res.status(500).json({ message: 'Ошибка сервера. Попробуйте ещё раз.' });
   }
 

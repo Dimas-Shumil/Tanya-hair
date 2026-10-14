@@ -5,39 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <title>Работа | ShumDev Custom CMS</title>
-    <link rel="stylesheet" href="/site/css/admin.min.css" />
-    <script src="/site/js/admin/common.js" defer></script>
-    <script src="/site/js/admin/work-edit.js" defer></script>
+    <link rel="stylesheet" href="/site/css/admin.min.css?v=20261013-1" />
+    <script src="/site/js/admin/common.js?v=20261013-1" defer></script>
+    <script src="/site/js/admin/work-edit.js?v=20261013-1" defer></script>
   </head>
 
   <body class="admin-body" data-admin-page="works">
     <div class="admin-shell">
-      <aside class="admin-sidebar">
-        <a class="admin-sidebar__brand" href="/admin/works">
-          <span>ShumDev Custom CMS</span>
-          <strong>СТИЛЬ</strong>
-        </a>
-
-        <nav class="admin-sidebar__nav" aria-label="Админ-панель">
-          <a href="/admin/works" data-admin-nav="works">Портфолио</a>
-          <a href="/admin/requests" data-admin-nav="requests">Заявки</a>
-        </nav>
-
-        <div class="admin-sidebar__actions">
-          <button
-            type="button"
-            class="admin-sidebar__site-button"
-            data-admin-return-site
-          >
-            ← Вернуться на сайт
-          </button>
-
-          <button type="button" class="admin-sidebar__logout" data-admin-logout>
-            Выйти
-          </button>
-        </div>
-      </aside>
-
       <main class="admin-main">
         <header class="admin-topbar">
           <div>
@@ -169,8 +143,18 @@
               <small>JPG, PNG, WEBP · до 8 МБ · максимум 20 фото</small>
             </label>
 
-            <div class="admin-pending-files" id="pendingFiles" hidden></div>
+            <div class="admin-pending" id="pendingGroup" hidden>
+              <div class="admin-photo-heading">
+                <h3>Выбраны к загрузке</h3>
+                <span>Уберите ненужные фото крестиком. Загрузятся после «Сохранить».</span>
+              </div>
+              <div class="admin-pending-files" id="pendingFiles"></div>
+            </div>
 
+            <div class="admin-photo-heading admin-photo-heading--saved" id="savedPhotosHeading" hidden>
+              <h3>Загруженные фото</h3>
+              <span>Фото с крестиком удаляется сразу после подтверждения.</span>
+            </div>
             <div class="admin-gallery" id="workGallery"></div>
 
             <p class="admin-empty" id="workGalleryEmpty">
@@ -201,6 +185,24 @@
           </div>
         </form>
       </main>
+      <nav class="admin-bottom-nav" aria-label="Навигация админ-панели">
+        <a href="/admin/works" data-admin-nav="works" class="admin-bottom-nav__link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span>Работы</span>
+        </a>
+        <a href="/admin/requests" data-admin-nav="requests" class="admin-bottom-nav__link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <span>Заявки</span>
+        </a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="admin-bottom-nav__link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/></svg>
+          <span>Смотреть на сайте</span>
+        </a>
+        <button type="button" data-admin-logout class="admin-bottom-nav__link admin-bottom-nav__logout">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5v16h5M14 8l4 4-4 4M8 12h10"/></svg>
+          <span>Выход</span>
+        </button>
+      </nav>
     </div>
   </body>
 </html>

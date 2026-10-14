@@ -556,17 +556,13 @@ function createWorksRoutes(prisma) {
         });
       }
 
-      if (image.work.isPublished && image.work._count.images <= 1) {
-        return res.status(400).json({
-          message:
-            'Нельзя удалить единственное фото опубликованной работы. Сначала снимите её с публикации.',
-        });
-      }
-
-      await prisma.workImage.delete({
-        where: {
-          id: imageId,
-        },
+      // Последнюю фотографию разрешаем удалять: работу автоматически переводим в черновик.
+      const unpublish = image.work.isPublished && image.work._count.images <= 1;
+      await prisma.$transaction(async (tx) => {
+        if (unpublish) {
+          await tx.work.update({ where: { id }, data: { isPublished: false } });
+        }
+        await tx.workImage.delete({ where: { id: imageId } });
       });
 
       try {
@@ -576,7 +572,10 @@ function createWorksRoutes(prisma) {
       }
 
       return res.json({
-        message: 'Фотография удалена.',
+        message: unpublish
+          ? 'Фото удалено. Работа переведена в черновик — добавьте новое фото для публикации.'
+          : 'Фотография удалена.',
+        unpublished: unpublish,
       });
     }),
   );
